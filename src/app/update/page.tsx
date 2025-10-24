@@ -10,7 +10,7 @@ export default function UpdatePage() {
     return (
       
     <div className="p-6 max-w-2xl mx-auto flex flex-col">
-        <h4>Update the records based on the ID's</h4>
+        <h4>Update the records based on the IDs</h4>
         <h1 className="text-2xl font-bold mb-4">Update a Post</h1>
         <input
             type="number"

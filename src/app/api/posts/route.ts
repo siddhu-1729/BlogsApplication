@@ -26,9 +26,10 @@ export async function GET(req: NextRequest) {
       const allPosts = await db.select().from(Post).orderBy(desc(Post.createdAt));
       return NextResponse.json(allPosts);
     }
-  } catch (error: any) {
-    console.error("GET Error:", error);
-    return NextResponse.json({ error: error.message || "Failed to fetch posts" }, { status: 500 });
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "Failed to fetch posts";
+    console.error("GET Error:", message);
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }
 
@@ -49,9 +50,10 @@ export async function POST(req: NextRequest) {
       .returning();
 
     return NextResponse.json(result[0]);
-  } catch (error: any) {
-    console.error("POST Error:", error);
-    return NextResponse.json({ error: "Failed to create post" }, { status: 500 });
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "Failed to create post";
+    console.error("POST Error:", message);
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }
 
