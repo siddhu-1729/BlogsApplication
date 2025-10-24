@@ -1,9 +1,8 @@
 "use client"
-import react from "react";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 export default function UpdatePage() {
-  const router = useRouter();
+  // const router = useRouter();
   const [postId, setPostId] = useState<number>(0);
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
@@ -36,7 +35,7 @@ export default function UpdatePage() {
             onChange={(e) => setContent(e.target.value)}
             required
         />
-        <input type="file" name="imageUrl"  className="file:mr-4 file:font-semibold w-full border-2 mb-2 file:bg-gray-400 rounded-2xl"
+        <input type="file" name="imageUrl" value={imageUrl} className="file:mr-4 file:font-semibold w-full border-2 mb-2 file:bg-gray-400 rounded-2xl"
         onChange={(e)=>setimageUrl(e.target.value)}/>
         <button
           className="bg-green-600 text-white px-4 py-2 rounded"

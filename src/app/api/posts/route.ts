@@ -1,26 +1,30 @@
 import { NextRequest, NextResponse } from "next/server";
-import { db } from "../../../lib/db"; 
-import { Post } from "../../../lib/schema"; 
+import { db } from "../../../lib/db";
+import { Post } from "../../../lib/schema";
 import { eq, desc } from "drizzle-orm";
 
-//  GET all posts
+// ✅ Type for POST body
+type PostBody = {
+  title: string;
+  content: string;
+  imageUrl?: string;
+  categories: string; // Single category
+};
 
- export async function GET(req: NextRequest) {
+// GET all posts or single post
+export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
     const id = searchParams.get("id");
 
     if (id) {
-      // Fetch single post
       const result = await db.select().from(Post).where(eq(Post.id, Number(id)));
-      if (result.length === 0) {
+      if (result.length === 0)
         return NextResponse.json({ error: "Post not found" }, { status: 404 });
-      }
-      return NextResponse.json(result[0]);  // Return single post object
+      return NextResponse.json(result[0]);
     } else {
-      // Fetch all posts
       const allPosts = await db.select().from(Post).orderBy(desc(Post.createdAt));
-      return NextResponse.json(allPosts);  // Return array of posts
+      return NextResponse.json(allPosts);
     }
   } catch (error: any) {
     console.error("GET Error:", error);
@@ -28,12 +32,10 @@ import { eq, desc } from "drizzle-orm";
   }
 }
 
-
-
-//  POST a new post
+// POST a new post
 export async function POST(req: NextRequest) {
   try {
-    const { title, content, imageUrl,categories } = await req.json();
+    const { title, content, imageUrl, categories }: PostBody = await req.json();
 
     const result = await db
       .insert(Post)
@@ -41,17 +43,19 @@ export async function POST(req: NextRequest) {
         title,
         content,
         imageUrl,
-        createdAt: new Date(), //  ensure timestamp of data
-        categories,
+        categories: categories || "Uncategorized",
+        createdAt: new Date(),
       })
       .returning();
 
     return NextResponse.json(result[0]);
-  } catch (error) {
+  } catch (error: any) {
     console.error("POST Error:", error);
     return NextResponse.json({ error: "Failed to create post" }, { status: 500 });
   }
 }
+
+// DELETE and PUT routes remain same as before
 
 //  DELETE a post
 export async function DELETE(req: NextRequest) {
