@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+=======
+# BlogsApplication
+Next.js, Shandcn/UI, tailwind, Postgresql, typescript, DrizzleORM, TanStackQuery, ZusStand , 
+
+>>>>>>> b6b05a9 (Deleted unnecessary files)
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started

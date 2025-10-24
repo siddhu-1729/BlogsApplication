@@ -44,6 +44,7 @@ export default function Home() {
   const currentPosts = allPosts.slice(indexOfFirstPost, indexOfLastPost);
   const totalPages = Math.ceil(allPosts.length / postsPerPage);
 
+
   return (
     <main className="min-h-screen py-12 px-6 bg-gray-50">
       <div className="max-w-6xl mx-auto text-gray-900">
@@ -96,7 +97,15 @@ export default function Home() {
                     <p className="text-sm text-gray-500">
                       {new Date(post.createdAt).toLocaleDateString()}
                     </p>
-                    <p className="bg-blue-500 rounded-4xl p-1">{post.categories}</p>
+                    <p className="">{post.categories =="Tech"?
+                      <span className="bg-red-200 rounded-4xl p-2">{post.categories}</span>:
+                      <span className="">{post.categories=="Education"?
+                      <span className="bg-green-200 rounded-4xl p-2">{post.categories}</span>:
+                      <span className="">{post.categories=="News"?
+                      <span className="bg-blue-200 rounded-4xl p-2">{post.categories}</span>:
+                      <span className="bg-orange-300 rounded-4xl p-2">{post.categories}</span>
+                      }</span>
+                      }</span>}</p> &#8594;
                   </div>
                 </Link>
               ))
@@ -129,7 +138,15 @@ export default function Home() {
                     <p className="text-sm text-gray-500">
                       {new Date(post.createdAt).toLocaleDateString()}
                     </p>
-                    <p className="bg-blue-500 rounded-4xl p-1">{post.categories}</p>
+                    <p className="">{post.categories =="Tech"?
+                      <span className="bg-red-200 rounded-4xl p-2">{post.categories}</span>:
+                      <span className="">{post.categories=="Education"?
+                      <span className="bg-green-200 rounded-4xl p-2">{post.categories}</span>:
+                      <span className="">{post.categories=="News"?
+                      <span className="bg-blue-200 rounded-4xl p-2">{post.categories}</span>:
+                      <span className="bg-orange-300 rounded-4xl p-2">{post.categories}</span>
+                      }</span>
+                      }</span>}</p> &#8594;
                   </div>
                 </Link>
                 

@@ -42,7 +42,7 @@ export async function POST(req: NextRequest) {
         content,
         imageUrl,
         createdAt: new Date(), //  ensure timestamp of data
-        categories: categories?.length ? categories : [],
+        categories,
       })
       .returning();
 

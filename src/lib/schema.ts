@@ -19,6 +19,6 @@ export const Post = pgTable("Post", {
   imageUrl: text("imageUrl"),
   // published: boolean("published").default(false),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
-  categories: text("categories").array().notNull(),
+  categories: text("categories").notNull(),
 });
 

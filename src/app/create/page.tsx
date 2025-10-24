@@ -8,15 +8,20 @@ export default function CreatePost() {
   const [content, setContent] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
-  const categories = ["All", "Tech", "Lifestyle", "News", "Education"];
 
+  const categories = ["All", "Tech", "Lifestyle", "News", "Education"];
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     await fetch("/api/posts", {
       method: "POST",
-      headers:{"Content-Type": "application/json"},
-      body: JSON.stringify({ title, content ,imageUrl ,categories}),
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        title,
+        content,
+        imageUrl,
+        categories: selectedCategory, // ✅ FIXED
+      }),
     });
     router.push("/");
   }
@@ -28,12 +33,12 @@ export default function CreatePost() {
           {/* Header */}
           <div className="bg-linear-to-r from-amber-500 to-orange-600 px-8 py-6">
             <h2 className="text-3xl font-serif font-semibold text-white text-center">
-               Create Your Blog Post
+              Create Your Blog Post
             </h2>
           </div>
 
           {/* Form Content */}
-          <div className="px-8 py-10 space-y-8">
+          <form onSubmit={handleSubmit} className="px-8 py-10 space-y-8">
             {/* Title */}
             <div>
               <label className="block text-gray-700 font-semibold mb-3 text-sm uppercase tracking-wide">
@@ -86,12 +91,28 @@ export default function CreatePost() {
               />
             </div>
 
-            {/* Divider */}
+            {/* Category Dropdown */}
+            <div>
+              <label className="block text-gray-700 font-semibold mb-3 text-sm uppercase tracking-wide">
+                Category
+              </label>
+              <select
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+                className="border-2 border-gray-300 rounded-lg px-4 py-3 text-gray-700 focus:ring-4 focus:ring-amber-100 outline-none transition-all duration-200"
+              >
+                {categories.map((cat) => (
+                  <option key={cat} value={cat}>
+                    {cat}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Submit */}
             <div className="border-t border-gray-200 pt-6">
-              {/* Submit Button */}
               <button
-                type="button"
-                onClick={handleSubmit}
+                type="submit"
                 className="w-full bg-linear-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 
                          text-white font-semibold py-4 rounded-lg shadow-lg hover:shadow-xl 
                          transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98]
@@ -100,21 +121,7 @@ export default function CreatePost() {
                 Publish Post ✨
               </button>
             </div>
-            <div className="mb-6">
-  <label className="mr-2 font-medium">Filter by Category:</label>
-  <select
-    value={selectedCategory}
-    onChange={(e) => setSelectedCategory(e.target.value)}
-    className="border rounded px-2 py-1"
-  >
-    {categories.map((cat) => (
-      <option key={cat} value={cat}>
-        {cat}
-      </option>
-    ))}
-  </select>
-</div>
-          </div>
+          </form>
 
           {/* Footer */}
           <div className="bg-gray-50 px-8 py-5 border-t border-gray-200">
@@ -125,7 +132,5 @@ export default function CreatePost() {
         </div>
       </div>
     </div>
-
-
   );
 }
