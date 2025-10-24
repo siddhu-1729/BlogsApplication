@@ -1,42 +1,34 @@
-<<<<<<< HEAD
-=======
 # BlogsApplication
-Next.js, Shandcn/UI, tailwind, Postgresql, typescript, DrizzleORM, TanStackQuery, ZusStand , 
 
->>>>>>> b6b05a9 (Deleted unnecessary files)
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Tech Stack Used in this Application is 
+  - Next.js , Tailwind CSS , PostgreSQL , TypeScript
+  - for database interactions used Drizzle ORM (Object Relational Mapping)
+  
+## Features Implemented
+  - A Create section for everyone to publish a along with image rendering, so that they can add images for the post
+  - Update section for them to update the post based on the ID (for clean UI ID has't displayed in UI)
+  - Delete Section for them to delete the post
 
-## Getting Started
 
-First, run the development server:
+ # How to Run this Application Locally 
+ - you can download the ZIP file from this Repo or Clone the respository into your local Folder by using the following Command:
+   git clone https://github.com/siddhu-1729/BlogsApplication.git 
+ -After getting the project into your local folder install the required modules 
+   npm install 
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+# Databse Setup 
+- Install postgreSQL into your machine by the follwing link https://www.enterprisedb.com/downloads/postgres-postgresql-downloads
+- Now create a server within the posgreSQL and a database named Blogs (I have used in this project)
+- Check in Package.json file for the dependency drizzle-orm  "drizzle-orm": "^0.44.6",
+  if you don't have just install drizzle orm by the command : npm install -D drizzle-kit (in your projects terminal)
+  Now update the schema.ts file with all the required fields
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+RUN the migrations with the commands :
+   - npx drizzle-kit generate
+   - npx drizzle-kit  push (By this a table will be ready in your database{postgres})
+Don't forget to update the .env file with database Credentials of yours.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+# Run the dev 
+  - by using the command : npm run dev
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
