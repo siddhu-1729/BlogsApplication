@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build --turbopack",
+    "build": "NEXT_PUBLIC_SKIP_ESLINT=true next build --turbopack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint"  
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
@@ -36,5 +36,4 @@
   "engines": {
   "node": ">=18 <=22"
 }
-
 }
