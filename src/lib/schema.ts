@@ -10,9 +10,9 @@
 
 // if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
 
-import { pgTable, serial, varchar, text, timestamp, boolean } from "drizzle-orm/pg-core";
+import { pgTable, serial, varchar, text, timestamp} from "drizzle-orm/pg-core";
 
-export const Post = pgTable("Post", {
+export const Post = pgTable("post", {
   id: serial("id").primaryKey(),
   title: varchar("title", { length: 255 }).notNull(),
   content: text("content").notNull(),

@@ -83,23 +83,39 @@ export async function DELETE(req: NextRequest) {
 }
 
 //  UPDATE a post
+//  UPDATE a post
 export async function PUT(req: NextRequest) {
   try {
     const { id, title, content, imageUrl, published } = await req.json();
 
     if (!id) {
-      return NextResponse.json({ error: "Post ID is required" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Post ID is required" },
+        { status: 400 }
+      );
+    }
+
+    // Build the object of fields to update
+    const fieldsToUpdate: Record<string, any> = {
+      ...(title && { title }),
+      ...(content && { content }),
+      ...(imageUrl !== undefined && { imageUrl }),
+      ...(published !== undefined && { published }),
+      updatedAt: new Date(),
+    };
+
+    // Prevent empty updates
+    if (Object.keys(fieldsToUpdate).length === 1) {
+      // Only updatedAt is present, so no actual data update
+      return NextResponse.json(
+        { error: "No fields provided to update" },
+        { status: 400 }
+      );
     }
 
     const updated = await db
       .update(Post)
-      .set({
-        ...(title && { title }),
-        ...(content && { content }),
-        ...(imageUrl !== undefined && { imageUrl }),
-        ...(published !== undefined && { published }),
-        updatedAt: new Date(), // ✅ optional: track modification time
-      })
+      .set(fieldsToUpdate)
       .where(eq(Post.id, Number(id)))
       .returning();
 
@@ -110,6 +126,9 @@ export async function PUT(req: NextRequest) {
     return NextResponse.json(updated[0]);
   } catch (error) {
     console.error("PUT Error:", error);
-    return NextResponse.json({ error: "Failed to update post" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to update post" },
+      { status: 500 }
+    );
   }
 }
