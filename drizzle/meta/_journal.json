@@ -15,6 +15,13 @@
       "when": 1761135743064,
       "tag": "0001_dizzy_vertigo",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1761284990553,
+      "tag": "0002_third_talkback",
+      "breakpoints": true
     }
   ]
 }

@@ -1,0 +1,1 @@
+ALTER TABLE "Post" ALTER COLUMN "categories" SET DATA TYPE text;
