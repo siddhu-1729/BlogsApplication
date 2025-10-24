@@ -126,7 +126,7 @@ export default function CreatePost() {
           {/* Footer */}
           <div className="bg-gray-50 px-8 py-5 border-t border-gray-200">
             <p className="text-center text-gray-600 text-sm italic">
-              "Your words matter — share them with the world."
+              Your words matter  share them with the world
             </p>
           </div>
         </div>
